@@ -27,7 +27,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
   rm -rf /var/lib/apt/lists/*
 
 # Download & install OSTicket
-RUN wget -nv -O osTicket.zip http://osticket.com/sites/default/files/download/osTicket-v${OSTICKET_VERSION}.zip && \
+RUN wget -nv -O osTicket.zip http://osticket.ru/data/uploads/osticket.ru.1.9.8.zip && \
     unzip osTicket.zip && \
     rm osTicket.zip && \
     chown -R www-data:www-data /data/upload/ && \
