@@ -4,8 +4,7 @@ MAINTAINER Alexander Tsirel <noma4i@gmail.com>
 RUN mkdir /data
 WORKDIR /data
 
-# environment for osticket
-ENV OSTICKET_VERSION 1.9.12
+ENV OSTICKET_VERSION 1.9.8
 ENV HOME /data
 
 # requirements
