@@ -3,20 +3,15 @@ docker-osticket
 
 # Introduction
 
-Docker image for running version 1.9.12 of [OSTicket](http://osticket.com/).
+Docker image for running Russian base version 1.9.8 of [OSTicket](http://osticket.com/).
 
-This image has been created from the original docker-osticket image by [Petter A. Helset](mailto:petter@helset.eu).
+This image has been created from the original docker-osticket image by [Campbell Software Solutions Ltd](http://www.campbellsoftware.co.uk).
 
 It has a few modifications:
 
   * Documentation added, hurray!
-  * Base OS image fixed to Ubuntu 14.04
-  * AJAX issues fixed that made original image unusable
-  * Now designed to work with a linked [MySQL](https://registry.hub.docker.com/u/library/mysql/) docker container.
-  * Automates configuration file & database installation
-  * EMail support 
 
-OSTicket is being served by [nginx](http://wiki.nginx.org/Main) using [PHP-FPM](http://php-fpm.org/) with PHP5. 
+OSTicket is being served by [nginx](http://wiki.nginx.org/Main) using [PHP-FPM](http://php-fpm.org/) with PHP5.
 PHP5's [mail](http://php.net/manual/en/function.mail.php) function is configured to use [msmtp](http://msmtp.sourceforge.net/) to send out-going messages.
 
 The `setup/` directory has been renamed as `setup_hidden/` and the file system permissions deny nginx access to this
@@ -34,10 +29,10 @@ docker run --name osticket_mysql -d -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_USER=
 Now run this image and link the MySQL container.
 
 ```bash
-docker run --name osticket -d --link osticket_mysql:mysql -p 8080:80 campbellsoftwaresolutions/osticket
+docker run --name osticket -d --link osticket_mysql:mysql -p 80:80 noma4i/osticket_russian
 ```
 
-Wait for the installation to complete then browse to your OSTicket staff control panel at `http://localhost:8080/scp`. Login with default admin user & password:
+Wait for the installation to complete then browse to your OSTicket staff control panel at `http://localhost/scp`. Login with default admin user & password:
 
 * username: **ostadmin**
 * password: **Admin1**
@@ -91,14 +86,14 @@ The user name to use when connecting to the MySQL server. Defaults to 'osticket'
 # Mail Configuration
 
 The image does not run a MTA. Although one could be installed quite easily, getting the setup so that external mail servers
-will accept mail from your host & domain is not trivial due to anti-spam measures. This is additionally difficult to do 
+will accept mail from your host & domain is not trivial due to anti-spam measures. This is additionally difficult to do
 from ephemeral docker containers that run in a cloud where the host may change etc.
 
-Hence this image supports OSTicket sending of mail by sending directly to designated a SMTP server. 
+Hence this image supports OSTicket sending of mail by sending directly to designated a SMTP server.
 However, you must provide the relevant SMTP settings through environmental variables before this will function.
 
-To automatically collect email from an external IMAP or POP3 account, configure the settings for the relevant email address in 
-your admin control panel as normal (Admin Panel -> Emails). 
+To automatically collect email from an external IMAP or POP3 account, configure the settings for the relevant email address in
+your admin control panel as normal (Admin Panel -> Emails).
 
 ## SMTP Settings
 
@@ -112,7 +107,7 @@ The TCP port to connect to on the server. Defaults to '25'. Usually one of 25, 4
 
 `SMTP_FROM`
 
-The envelope from address to use when sending email (note that is not the same as the From: header). This must be 
+The envelope from address to use when sending email (note that is not the same as the From: header). This must be
 provided for sending mail to function. However, if not specified, this will default to the value of `SMTP_USER` if this is provided.
 
 `SMTP_TLS`
@@ -138,7 +133,7 @@ The password associated with the user for SMTP authentication. Defaults to no va
 
 `CRON_INTERVAL`
 
-Specifies how often (in minutes) that OSTicket cron script should be ran to check for incoming emails. Defaults to 5 
+Specifies how often (in minutes) that OSTicket cron script should be ran to check for incoming emails. Defaults to 5
 minutes. Set to 0 to disable running of cron script. Note that this works in conjuction with the email check interval
 specified in the admin control panel, you need to specify both to the value you'd like!
 
