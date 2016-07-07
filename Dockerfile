@@ -1,7 +1,6 @@
 FROM ubuntu:14.04
-MAINTAINER Martin Campbell <martin@campbellsoftware.co.uk>
+MAINTAINER Alexander Tsirel <noma4i@gmail.com>
 
-# setup workdir
 RUN mkdir /data
 WORKDIR /data
 
