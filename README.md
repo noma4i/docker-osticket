@@ -1,5 +1,7 @@
-docker-osticket
+docker-osticket (Russian language version)
 ===============
+[![](https://images.microbadger.com/badges/image/noma4i/osticket_russian.svg)](https://microbadger.com/images/noma4i/osticket_russian "Get your own image badge on microbadger.com")
+
 
 # Introduction
 
